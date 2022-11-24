@@ -4,8 +4,8 @@
  class BluetoothTerminal {
   /**
    * Create preconfigured Bluetooth Terminal instance.
-   * @param {!(number|string)} [serviceUuid="19B10000-E8F2-537E-4F6C-D104768A1214"] - Service UUID
-   * @param {!(number|string)} [characteristicUuid="19B10001-E8F2-537E-4F6C-D104768A1214"] - Characteristic UUID
+   * @param {!(number|string)} [serviceUuid=0xFFE0] - Service UUID
+   * @param {!(number|string)} [characteristicUuid=0xFFE1] - Characteristic UUID
    * @param {string} [receiveSeparator='\n'] - Receive separator
    * @param {string} [sendSeparator='\n'] - Send separator
    */
@@ -234,16 +234,46 @@
   }
 
   /**
-   * Request bluetooth device.
+   * Request bluetooth device.fthis._serviceUuid
    * @return {Promise}
    * @private
    */
   _requestBluetoothDevice() {
     this._log('Requesting bluetooth device...');
-
+    /*
     return navigator.bluetooth.requestDevice({
       filters: [{services: [this._serviceUuid]}],
     }).
+    */
+   /*
+    return navigator.bluetooth.requestDevice({
+      filters: [
+        { services: ["19b10001-e8f2-537e-4f6c-d104768a1214"] },
+      ],
+      // optionalServices: ["19b10001-e8f2-537e-4f6c-d104768a1214"],
+    }).
+    */
+   /*
+    return navigator.bluetooth.requestDevice({
+      acceptAllDevices: true,
+    }).
+    */
+   /*
+    return navigator.bluetooth.requestDevice({
+      acceptAllDevices: true,
+      optionalServices: ["19b10001-e8f2-537e-4f6c-d104768a1214"]
+    }).
+    */
+
+    let options = {
+      filters: [
+        // { services: [0x1800, 0x1801] },
+        { services: ["19b10001-e8f2-537e-4f6c-d104768a1214"] },
+      ],
+    };
+
+
+    return navigator.bluetooth.requestDevice(options).
         then((device) => {
           this._log('"' + device.name + '" bluetooth device selected');
 
