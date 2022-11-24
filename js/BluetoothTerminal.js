@@ -265,11 +265,17 @@
     }).
     */
 
+    /*
     let options = {
       filters: [
         // { services: [0x1800, 0x1801] },
         { services: ["19b10000-e8f2-537e-4f6c-d104768a1214"] },
       ],
+    };
+    */
+    let options = {
+      acceptAllDevices: true,
+      optionalServices: ["19b10000-e8f2-537e-4f6c-d104768a1214"]
     };
 
 
