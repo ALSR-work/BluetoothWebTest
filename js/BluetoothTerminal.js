@@ -234,7 +234,7 @@ class BluetoothTerminal {
   }
 
   /**
-   * Request bluetooth device.
+   * Request bluetooth device.fthis._serviceUuid
    * @return {Promise}
    * @private
    */
@@ -258,10 +258,20 @@ class BluetoothTerminal {
       acceptAllDevices: true,
     }).
     */
+   /*
     return navigator.bluetooth.requestDevice({
       acceptAllDevices: true,
       optionalServices: ["19b10001-e8f2-537e-4f6c-d104768a1214"]
     }).
+    */
+
+    let options = {
+      filters: [
+        { services: [0x1800, 0x1801] },
+        { services: ["19b10001-e8f2-537e-4f6c-d104768a1214"] },
+      ],
+    };
+    return navigator.bluetooth.requestDevice(options).
         then((device) => {
           this._log('"' + device.name + '" bluetooth device selected');
 
