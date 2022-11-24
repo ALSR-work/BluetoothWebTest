@@ -268,7 +268,7 @@
     let options = {
       filters: [
         // { services: [0x1800, 0x1801] },
-        { services: ["19b10001-e8f2-537e-4f6c-d104768a1214"] },
+        { services: ["19b10000-e8f2-537e-4f6c-d104768a1214"] },
       ],
     };
 
