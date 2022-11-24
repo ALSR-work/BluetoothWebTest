@@ -251,7 +251,10 @@ class BluetoothTerminal {
     }).
     */
     return navigator.bluetooth.requestDevice({
-      filters: [{optionalServices: ["19b10001-e8f2-537e-4f6c-d104768a1214"]}],
+      filters: [
+        { services: ["19b10001-e8f2-537e-4f6c-d104768a1214"] },
+      ],
+      // optionalServices: ["19b10001-e8f2-537e-4f6c-d104768a1214"],
     }).
         then((device) => {
           this._log('"' + device.name + '" bluetooth device selected');
