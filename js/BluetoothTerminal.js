@@ -346,6 +346,10 @@
 
           characteristic.addEventListener('characteristicvaluechanged',
               this._boundHandleCharacteristicValueChanged);
+        })
+        .catch((error) => {
+          console.log("SOME NOTIFICATION ERROR");
+          console.log(error);
         });
   }
 
