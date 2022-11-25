@@ -200,7 +200,7 @@
   _connectToDevice(device) {
     return (device ? Promise.resolve(device) : this._requestBluetoothDevice()).
         then((device) => this._connectDeviceAndCacheCharacteristic(device)).
-        // then((characteristic) => this._startNotifications(characteristic)).
+        then((characteristic) => this._startNotifications(characteristic)).
         catch((error) => {
           this._log(error);
           return Promise.reject(error);
@@ -310,13 +310,15 @@
           this._log('GATT server connected', 'Getting service...');
 
           // return server.getPrimaryService(this._serviceUuid);
-          return server.getPrimaryService(0x1800);
+          //return server.getPrimaryService(0x1800);
+          return server.getPrimaryService("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82");
         }).
         then((service) => {
           this._log('Service found', 'Getting characteristic...');
 
           // return service.getCharacteristic(this._characteristicUuid);
-          return service.getCharacteristic("00002a00-0000-1000-8000-00805f9b34fb");
+          // return service.getCharacteristic("00002a00-0000-1000-8000-00805f9b34fb");
+          return service.getCharacteristic("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82");
         }).
         then((characteristic) => {
           this._log('Characteristic found');
@@ -377,7 +379,7 @@
         '" bluetooth device disconnected, trying to reconnect...');
 
     this._connectDeviceAndCacheCharacteristic(device).
-        // then((characteristic) => this._startNotifications(characteristic)).
+        then((characteristic) => this._startNotifications(characteristic)).
         catch((error) => this._log(error));
   }
 
