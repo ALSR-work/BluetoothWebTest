@@ -318,7 +318,7 @@
 
           // return service.getCharacteristic(this._characteristicUuid);
           // return service.getCharacteristic("19b10001-e8f2-537e-4f6c-d104768a1214");
-          return service.getCharacteristic("00002A00-0000-1000-8000-00805f9b34fb");
+          return service.getCharacteristic("00002a00-0000-1000-8000-00805f9b34fb");
         }).
         then((characteristic) => {
           this._log('Characteristic found');
