@@ -309,12 +309,14 @@
         then((server) => {
           this._log('GATT server connected', 'Getting service...');
 
-          return server.getPrimaryService(this._serviceUuid);
+          // return server.getPrimaryService(this._serviceUuid);
+          return server.getPrimaryService("19b10000-e8f2-537e-4f6c-d104768a1214");
         }).
         then((service) => {
           this._log('Service found', 'Getting characteristic...');
 
-          return service.getCharacteristic(this._characteristicUuid);
+          // return service.getCharacteristic(this._characteristicUuid);
+          return service.getCharacteristic("19b10001-e8f2-537e-4f6c-d104768a1214");
         }).
         then((characteristic) => {
           this._log('Characteristic found');
