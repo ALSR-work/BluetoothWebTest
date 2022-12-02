@@ -401,8 +401,10 @@
    * @private
    */
   _handleCharacteristicValueChanged(event) {
-    console.log('FUNCTION CharacteristicValueChanged');
+    // console.log('FUNCTION CharacteristicValueChanged');
     const value = new TextDecoder().decode(event.target.value);
+    console.log('CharacteristicValueChanged');
+    console.log(value);
 
     for (const c of value) {
       if (c === this._receiveSeparator) {
