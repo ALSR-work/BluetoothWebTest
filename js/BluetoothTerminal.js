@@ -128,6 +128,8 @@
    * @param {string} data - Data
    */
   receive(data) {
+    console.log('Data comming in:');
+    console.log(data);
     // Handle incoming data.
   }
 
@@ -399,6 +401,7 @@
    * @private
    */
   _handleCharacteristicValueChanged(event) {
+    console.log('FUNCTION CharacteristicValueChanged');
     const value = new TextDecoder().decode(event.target.value);
 
     for (const c of value) {
