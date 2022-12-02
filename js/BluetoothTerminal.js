@@ -283,7 +283,7 @@
    
     let options = {
       acceptAllDevices: true,
-      optionalServices: [0x1800, 0x1801, "e6911662-0e51-44b3-a600-4106bfec83a6", 0x1101, 0x2101]
+      optionalServices: [0x1800, 0x1801, "19b10000-e8f2-537e-4f6c-d104768a1214", "b6e2afdd-2d5a-4f14-abbd-edb123c2ed82", "00001101-0000-1000-8000-00805F9B34FB", "e6911662-0e51-44b3-a600-4106bfec83a6", 0x1101, 0x2101]
     };
     return navigator.bluetooth.requestDevice(options).
         then((device) => {
@@ -315,18 +315,16 @@
         then((server) => {
           this._log('GATT server connected', 'Getting service...');
 
-          // return server.getPrimaryService(this._serviceUuid);      // ursprünglich 
-          // return server.getPrimaryService(0x1800);                   // Probleme
           // return server.getPrimaryService("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82"); // noch keine Funktion hinterlegt im Arduino Code
-          return server.getPrimaryService("19b10000-e8f2-537e-4f6c-d104768a1214");
+          // return server.getPrimaryService("19b10000-e8f2-537e-4f6c-d104768a1214");  // funktioniert 29-11
+          return server.getPrimaryService("00001101-0000-1000-8000-00805F9B34FB");
         }).
         then((service) => {
           this._log('Service found', 'Getting characteristic...');
 
-          // return service.getCharacteristic(this._characteristicUuid);                // ursprünglich 
-          // return service.getCharacteristic("00002a00-0000-1000-8000-00805f9b34fb");  // Probleme
           // return service.getCharacteristic("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82");  // noch keine Funktion hinterlegt im Arduino Code
-          return service.getCharacteristic("19b10001-e8f2-537e-4f6c-d104768a1214");
+          // return service.getCharacteristic("19b10001-e8f2-537e-4f6c-d104768a1214");  // funktioniert 29-11
+          return service.getCharacteristic("00002101-0000-1000-8000-00805F9B34FB");
         }).
         then((characteristic) => {
           this._log('Characteristic found');
