@@ -407,14 +407,18 @@
     console.log(value);
 
     for (const c of value) {
+      console.log('FOR');
       if (c === this._receiveSeparator) {
+        console.log('First if');
         const data = this._receiveBuffer.trim();
         this._receiveBuffer = '';
 
         if (data) {
+          console.log('Second if');
           this.receive(data);
         }
       } else {
+        console.log('else');
         this._receiveBuffer += c;
       }
     }
