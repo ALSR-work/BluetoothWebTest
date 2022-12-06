@@ -404,12 +404,8 @@
     // console.log('FUNCTION CharacteristicValueChanged');
     const value = new TextDecoder().decode(event.target.value);
     console.log('CharacteristicValueChanged');
-    console.log('Event.Target.Value:');
-    console.log(event.target.value);
-    console.log(typeof event.target.value);
-    console.log('value');
-    console.log(value);
-    console.log(typeof value);
+    // console.log(value);
+    // console.log(typeof value);
     console.log(value.charCodeAt(0));
 
     for (const c of value) {
