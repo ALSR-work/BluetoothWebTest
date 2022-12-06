@@ -10,6 +10,7 @@
   "description": "Progressive Web Application for serial communication with your own Bluetooth Low Energy (Smart) devices",
   "theme_color": "#2196f3",
   "background_color": "#ffffff",
+  "id": "/BluetoothWebTest/",
   "icons": [
     {
       "src": "icons/android-chrome-36x36.png",
