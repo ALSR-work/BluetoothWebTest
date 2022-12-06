@@ -404,21 +404,28 @@
     // console.log('FUNCTION CharacteristicValueChanged');
     const value = new TextDecoder().decode(event.target.value);
     console.log('CharacteristicValueChanged');
+    console.log('Event.Target.Value:');
+    console.log(event.target.value);
+    console.log(typeof event.target.value);
+    console.log(event.target.value.charCodeAt(0));
+    console.log('value');
     console.log(value);
+    console.log(typeof value);
+    console.log(value.charCodeAt(0));
 
     for (const c of value) {
-      console.log('FOR');
+      // console.log('FOR');
       if (c === this._receiveSeparator) {
-        console.log('First if');
+        // console.log('First if');
         const data = this._receiveBuffer.trim();
         this._receiveBuffer = '';
 
         if (data) {
-          console.log('Second if');
+          // console.log('Second if');
           this.receive(data);
         }
       } else {
-        console.log('else');
+        // console.log('else');
         this._receiveBuffer += c;
       }
     }
