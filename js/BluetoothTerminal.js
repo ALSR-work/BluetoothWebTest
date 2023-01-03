@@ -200,8 +200,14 @@
    * @private
    */
   _connectToDevice(device) {
+    const primaryService1 = "51f12615-515e-413a-b2e1-1da61f7faec7";   // vacuum
+    const primaryService2 = "19b10000-e8f2-537e-4f6c-d104768a1214";   // vent
+    const primaryCharacteristic1 = "51f12615-515e-413a-b2e1-1da61f7faec7"; // vacuum
+    const primaryCharacteristic2 = "19b10001-e8f2-537e-4f6c-d104768a1214"; // vent
     return (device ? Promise.resolve(device) : this._requestBluetoothDevice()).
-        then((device) => this._connectDeviceAndCacheCharacteristic(device)).
+        then((device) => this._connectDeviceAndCacheCharacteristic(device, primaryService1, primaryCharacteristic1)).
+        then((characteristic) => this._startNotifications(characteristic)).
+        then(() => this._connectDeviceAndCacheCharacteristic(device, primaryService2, primaryCharacteristic2)).
         then((characteristic) => this._startNotifications(characteristic)).
         catch((error) => {
           this._log(error);
@@ -282,7 +288,14 @@
       optionalServices: [0x1800, 0x1801, "19b10000-e8f2-537e-4f6c-d104768a1214", "b6e2afdd-2d5a-4f14-abbd-edb123c2ed82", "e6911662-0e51-44b3-a600-4106bfec83a6", 0x1101, 0x2101]
     };
     */
-   
+
+   /* funktioniert 03-01
+    let options = {
+      acceptAllDevices: true,
+      optionalServices: [0x1800, 0x1801, "19b10000-e8f2-537e-4f6c-d104768a1214", "b6e2afdd-2d5a-4f14-abbd-edb123c2ed82", "00001101-0000-1000-8000-00805f9b34fb", "e6911662-0e51-44b3-a600-4106bfec83a6", 0x1101, 0x2101]
+    };
+    */
+
     let options = {
       acceptAllDevices: true,
       optionalServices: [0x1800, 0x1801, "19b10000-e8f2-537e-4f6c-d104768a1214", "b6e2afdd-2d5a-4f14-abbd-edb123c2ed82", "00001101-0000-1000-8000-00805f9b34fb", "e6911662-0e51-44b3-a600-4106bfec83a6", 0x1101, 0x2101]
@@ -305,7 +318,7 @@
    * @return {Promise}
    * @private
    */
-  _connectDeviceAndCacheCharacteristic(device) {
+  _connectDeviceAndCacheCharacteristic(device, primaryService, primaryCharacteristic) {   // Service und Characteristic jeweils als string
     // Check remembered characteristic.
     if (device.gatt.connected && this._characteristic) {
       return Promise.resolve(this._characteristic);
@@ -319,14 +332,16 @@
 
           // return server.getPrimaryService("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82"); // noch keine Funktion hinterlegt im Arduino Code
           // return server.getPrimaryService("19b10000-e8f2-537e-4f6c-d104768a1214");  // funktioniert 29-11
-          return server.getPrimaryService("00001101-0000-1000-8000-00805f9b34fb");
+          // return server.getPrimaryService("00001101-0000-1000-8000-00805f9b34fb"); // funktioniert 22-12
+          return server.getPrimaryService(primaryService);
         }).
         then((service) => {
           this._log('Service found', 'Getting characteristic...');
 
           // return service.getCharacteristic("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82");  // noch keine Funktion hinterlegt im Arduino Code
           // return service.getCharacteristic("19b10001-e8f2-537e-4f6c-d104768a1214");  // funktioniert 29-11
-          return service.getCharacteristic("00002101-0000-1000-8000-00805f9b34fb");
+          // return service.getCharacteristic("00002101-0000-1000-8000-00805f9b34fb"); // funktioniert 22-12
+          return service.getCharacteristic(primaryCharacteristic);
         }).
         then((characteristic) => {
           this._log('Characteristic found');
