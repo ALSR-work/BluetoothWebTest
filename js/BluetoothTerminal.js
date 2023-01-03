@@ -206,9 +206,10 @@
     const primaryCharacteristic2 = "19b10001-e8f2-537e-4f6c-d104768a1214"; // vent
     return (device ? Promise.resolve(device) : this._requestBluetoothDevice()).
         then((device) => this._connectDeviceAndCacheCharacteristic(device, primaryService1, primaryCharacteristic1)).
-        then((characteristic) => this._startNotifications(characteristic)).
-        then(() => this._connectDeviceAndCacheCharacteristic(device, primaryService2, primaryCharacteristic2)).
-        then((characteristic) => this._startNotifications(characteristic)).
+        then((characteristic1) => this._startNotifications(characteristic1)).
+        then((x) => this._requestBluetoothDevice()).
+        then((deviceNew) => this._connectDeviceAndCacheCharacteristic(deviceNew, primaryService2, primaryCharacteristic2)).
+        then((characteristic2) => this._startNotifications(characteristic2)).
         catch((error) => {
           this._log(error);
           return Promise.reject(error);
