@@ -205,7 +205,9 @@
     const primaryCharacteristic1 = "51f12615-515e-413a-b2e1-1da61f7faec7"; // vacuum
     const primaryCharacteristic2 = "19b10001-e8f2-537e-4f6c-d104768a1214"; // vent
     return (device ? Promise.resolve(device) : this._requestBluetoothDevice()).
-        then((device) => this._connectDeviceAndCacheCharacteristic(device, primaryService1, primaryCharacteristic1)).
+        then((device) => { console.log("DEVICE DATA NEW"); console.log(device); });
+        /*
+        this._connectDeviceAndCacheCharacteristic(device, primaryService1, primaryCharacteristic1)).
         then((characteristic1) => this._startNotifications(characteristic1)).
         then((x) => this._requestBluetoothDevice()).
         then((deviceNew) => this._connectDeviceAndCacheCharacteristic(deviceNew, primaryService2, primaryCharacteristic2)).
@@ -214,6 +216,7 @@
           this._log(error);
           return Promise.reject(error);
         });
+        */
   }
 
   /**
