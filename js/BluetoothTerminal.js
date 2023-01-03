@@ -200,13 +200,15 @@
    * @private
    */
   _connectToDevice(device) {
-    const primaryService1 = "51f12615-515e-413a-b2e1-1da61f7faec7";   // vacuum
-    const primaryService2 = "19b10000-e8f2-537e-4f6c-d104768a1214";   // vent
-    const primaryCharacteristic1 = "51f12615-515e-413a-b2e1-1da61f7faec7"; // vacuum
-    const primaryCharacteristic2 = "19b10001-e8f2-537e-4f6c-d104768a1214"; // vent
     return (device ? Promise.resolve(device) : this._requestBluetoothDevice()).
-        then((device) => { console.log("DEVICE DATA NEW"); console.log(device); });
-        /*
+        then((device) => this._connectDeviceAndCacheCharacteristic(device)).
+        then((characteristicc) => this._startNotifications(characteristicc)).
+        catch((error) => {
+          this._log(error);
+          return Promise.reject(error);
+        });
+
+        /* ALT - mit Fehlern
         this._connectDeviceAndCacheCharacteristic(device, primaryService1, primaryCharacteristic1)).
         then((characteristic1) => this._startNotifications(characteristic1)).
         then((x) => this._requestBluetoothDevice()).
@@ -322,7 +324,12 @@
    * @return {Promise}
    * @private
    */
-  _connectDeviceAndCacheCharacteristic(device, primaryService, primaryCharacteristic) {   // Service und Characteristic jeweils als string
+  _connectDeviceAndCacheCharacteristic(device) {   
+    const primaryService1 = "51f12615-515e-413a-b2e1-1da61f7faec7";   // vacuum
+    const primaryService2 = "19b10000-e8f2-537e-4f6c-d104768a1214";   // vent
+    const primaryCharacteristic1 = "51f12615-515e-413a-b2e1-1da61f7faec7"; // vacuum
+    const primaryCharacteristic2 = "19b10001-e8f2-537e-4f6c-d104768a1214"; // vent
+
     // Check remembered characteristic.
     if (device.gatt.connected && this._characteristic) {
       return Promise.resolve(this._characteristic);
@@ -333,6 +340,7 @@
     return device.gatt.connect().
         then((server) => {
           this._log('GATT server connected', 'Getting service...');
+          console.log(server);
 
           // return server.getPrimaryService("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82"); // noch keine Funktion hinterlegt im Arduino Code
           // return server.getPrimaryService("19b10000-e8f2-537e-4f6c-d104768a1214");  // funktioniert 29-11
