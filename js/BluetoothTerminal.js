@@ -298,7 +298,7 @@
 
     let options = {
       acceptAllDevices: true,
-      optionalServices: [0x1800, 0x1801, "19b10000-e8f2-537e-4f6c-d104768a1214", "b6e2afdd-2d5a-4f14-abbd-edb123c2ed82", "00001101-0000-1000-8000-00805f9b34fb", "e6911662-0e51-44b3-a600-4106bfec83a6", 0x1101, 0x2101]
+      optionalServices: [0x1800, 0x1801, "51f12615-515e-413a-b2e1-1da61f7faec7", "19b10000-e8f2-537e-4f6c-d104768a1214", "51f12615-515e-413a-b2e1-1da61f7faec7", "19b10001-e8f2-537e-4f6c-d104768a1214"]
     };
     return navigator.bluetooth.requestDevice(options).
         then((device) => {
