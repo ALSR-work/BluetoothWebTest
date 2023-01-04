@@ -16,6 +16,7 @@
     this._maxCharacteristicValueLength = 20; // Max characteristic value length.
     this._device = null; // Device object cache.
     this._characteristic = null; // Characteristic object cache.
+    this._selectedService = 1;
 
     // Bound functions used to add and remove appropriate event handlers.
     this._boundHandleDisconnection = this._handleDisconnection.bind(this);
@@ -104,7 +105,7 @@
    *                   be started or rejected if something went wrong
    */
   connect() {
-    return this._connectToDevice(this._device, 1); // TODO: Change static value to frontend depending variable => this._chooseCharacteristic
+    return this._connectToDevice(this._device, this._selectedService); // TODO: Change static value to frontend depending variable => this._chooseCharacteristic
   }
 
   /**

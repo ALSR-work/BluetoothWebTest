@@ -6,6 +6,15 @@ const terminalContainer = document.getElementById('terminal');
 const sendForm = document.getElementById('send-form');
 const inputField = document.getElementById('input');
 
+const checkbox = document.getElementById('test');
+
+checkbox.addEventListener('click', () => {
+  console.log('horray!');
+  if (document.getElementById('test').checked) {
+  	console.log('checked');
+   }
+});
+
 // Helpers.
 const defaultDeviceName = 'Terminal';
 const terminalAutoScrollingLimit = terminalContainer.offsetHeight / 2;
