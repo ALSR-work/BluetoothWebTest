@@ -337,7 +337,11 @@
     const primaryCharacteristic1 = "51f12615-515e-413a-b2e1-1da61f7faec7"; // vacuum
     const primaryService2 = "19b10000-e8f2-537e-4f6c-d104768a1214";   // vent
     const primaryCharacteristic2 = "19b10001-e8f2-537e-4f6c-d104768a1214"; // vent
-  
+
+    let selectedPrimaryService = "19b10000-e8f2-537e-4f6c-d104768a1214";
+    let selectedPrimaryCharacteristic = "19b10001-e8f2-537e-4f6c-d104768a1214";
+
+    /*
     let selectedPrimaryService = "";
     let selectedPrimaryCharacteristic = "";
 
@@ -353,7 +357,7 @@
       console.error("Error inside connectDeviceAndCacheCharacteristic: chooseService var caused problem");
     }
     console.log('Selected: ' + selectedPrimaryService + ", " + selectedPrimaryCharacteristic);
-
+    */
     // Check remembered characteristic.
     if (device.gatt.connected && this._characteristic) {
       return Promise.resolve(this._characteristic);
