@@ -104,7 +104,7 @@
    *                   be started or rejected if something went wrong
    */
   connect() {
-    return this._connectToDevice(this._device);
+    return this._connectToDevice(this._device, this._chooseCharacteristic);
   }
 
   /**
@@ -199,9 +199,9 @@
    * @return {Promise}
    * @private
    */
-  _connectToDevice(device) {
+  _connectToDevice(device, chooseService) {
     return (device ? Promise.resolve(device) : this._requestBluetoothDevice()).
-        then((device) => this._connectDeviceAndCacheCharacteristic(device)).
+        then((device) => this._connectDeviceAndCacheCharacteristic(device, chooseService)).
         then((characteristicc) => this._startNotifications(characteristicc)).
         catch((error) => {
           this._log(error);
@@ -324,11 +324,23 @@
    * @return {Promise}
    * @private
    */
-  _connectDeviceAndCacheCharacteristic(device) {   
+  _connectDeviceAndCacheCharacteristic(device, chooseService) {   
     const primaryService1 = "51f12615-515e-413a-b2e1-1da61f7faec7";   // vacuum
-    const primaryService2 = "19b10000-e8f2-537e-4f6c-d104768a1214";   // vent
     const primaryCharacteristic1 = "51f12615-515e-413a-b2e1-1da61f7faec7"; // vacuum
+    const primaryService2 = "19b10000-e8f2-537e-4f6c-d104768a1214";   // vent
     const primaryCharacteristic2 = "19b10001-e8f2-537e-4f6c-d104768a1214"; // vent
+  
+    let selectedPrimaryService = "";
+    let selectedPrimaryCharacteristic = "";
+
+    if (chooseService == 1) {
+      selectedPrimaryService = primaryService1;
+      selectedPrimaryCharacteristic = primaryCharacteristic1;
+    } else if (chooseService == 2) {
+      selectedPrimaryService = primaryService2;
+      selectedPrimaryCharacteristic = primaryCharacteristic2;
+
+    }
 
     let serverSaved = undefined;
 
@@ -346,12 +358,12 @@
           // return server.getPrimaryService("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82"); // noch keine Funktion hinterlegt im Arduino Code
           // return server.getPrimaryService("19b10000-e8f2-537e-4f6c-d104768a1214"); // funktioniert 29-11
           // return server.getPrimaryService("00001101-0000-1000-8000-00805f9b34fb"); // funktioniert 22-12
-          return server.getPrimaryService(primaryService1);
+          return server.getPrimaryService(selectedPrimaryService);
         }).
-        then((x) => {
+        then((service) => {
           this._log('Service found', 'Getting characteristic...');
 
-          return server.getCharacteristic(primaryCharacteristic1);
+          return service.getCharacteristic(selectedPrimaryCharacteristic);
         }).
         then((characteristic) => {
           this._log('Characteristic found');

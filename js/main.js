@@ -1,6 +1,6 @@
 // UI elements.
 const deviceNameLabel = document.getElementById('device-name');
-const connectButton = document.getElementById('connect');
+const connectButton = document.getElementById('connect'); //Starts the whole connect procedure, including search, connection, ans subsscribing
 const disconnectButton = document.getElementById('disconnect');
 const terminalContainer = document.getElementById('terminal');
 const sendForm = document.getElementById('send-form');
