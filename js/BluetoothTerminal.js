@@ -373,7 +373,7 @@
           console.log(characteristic)
 
           this._characteristic = characteristic; // Remember characteristic.
-
+          return this._characteristic;
         });
   }
 
