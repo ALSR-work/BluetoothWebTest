@@ -330,6 +330,8 @@
     const primaryCharacteristic1 = "51f12615-515e-413a-b2e1-1da61f7faec7"; // vacuum
     const primaryCharacteristic2 = "19b10001-e8f2-537e-4f6c-d104768a1214"; // vent
 
+    let serverSaved = {};
+
     // Check remembered characteristic.
     if (device.gatt.connected && this._characteristic) {
       return Promise.resolve(this._characteristic);
@@ -341,28 +343,44 @@
         then((server) => {
           this._log('GATT server connected', 'Getting service...');
           console.log(server);
+          serverSaved = server;
 
           // return server.getPrimaryService("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82"); // noch keine Funktion hinterlegt im Arduino Code
           // return server.getPrimaryService("19b10000-e8f2-537e-4f6c-d104768a1214");  // funktioniert 29-11
           // return server.getPrimaryService("00001101-0000-1000-8000-00805f9b34fb"); // funktioniert 22-12
-          return server.getPrimaryService(primaryService);
+          return serverSaved.getPrimaryService(primaryService1);
         }).
-        then((service) => {
+        then((x) => {
           this._log('Service found', 'Getting characteristic...');
 
-          // return service.getCharacteristic("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82");  // noch keine Funktion hinterlegt im Arduino Code
-          // return service.getCharacteristic("19b10001-e8f2-537e-4f6c-d104768a1214");  // funktioniert 29-11
-          // return service.getCharacteristic("00002101-0000-1000-8000-00805f9b34fb"); // funktioniert 22-12
-          return service.getCharacteristic(primaryCharacteristic);
+          return serverSaved.getCharacteristic(primaryCharacteristic1);
         }).
-        then((characteristic) => {
+        then((characteristic1) => {
           this._log('Characteristic found');
           console.log('Charactersitic: ')
           console.log(characteristic)
 
-          this._characteristic = characteristic; // Remember characteristic.
+          this._characteristic = characteristic1; // Remember characteristic.
+
+          return serverSaved.getPrimaryService(primaryService1);
+        }).
+        then((y) => {
+          this._log('Service found', 'Getting characteristic...');
+
+          return serverSaved.getCharacteristic(primaryCharacteristic2);
+        }).
+        then((characteristic2) => {
+          this._log('Characteristic found');
+          console.log('Charactersitic: ')
+          console.log(characteristic)
+
+          this._characteristic = characteristic2; // Remember characteristic.
 
           return this._characteristic;
+        }).
+        catch((error) => {
+          console.log("Error inside connectDeviceAndCacheCharacteristic");
+          console.log(error);
         });
   }
 
