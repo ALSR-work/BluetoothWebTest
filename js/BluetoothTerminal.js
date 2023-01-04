@@ -362,7 +362,7 @@
 
           this._characteristic = characteristic1; // Remember characteristic.
 
-          return serverSaved.getPrimaryService(primaryService1);
+          return serverSaved.getPrimaryService(primaryService2);
         }).
         then((y) => {
           this._log('Service found', 'Getting characteristic...');
@@ -377,11 +377,11 @@
           this._characteristic = characteristic2; // Remember characteristic.
 
           return this._characteristic;
-        }).
+        })/*.
         catch((error) => {
           console.log("Error inside connectDeviceAndCacheCharacteristic");
           console.log(error);
-        });
+        })*/;
   }
 
   /**
