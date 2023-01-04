@@ -342,50 +342,25 @@
     return device.gatt.connect().
         then((server) => {
           this._log('GATT server connected', 'Getting service...');
-          console.log(server);
-          console.log(typeof server);
-          serverSaved = structuredClone(server);
-          console.log("serverSaved");
-          console.log(serverSaved);
-          console.log(typeof serverSaved);
 
           // return server.getPrimaryService("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82"); // noch keine Funktion hinterlegt im Arduino Code
-          // return server.getPrimaryService("19b10000-e8f2-537e-4f6c-d104768a1214");  // funktioniert 29-11
+          // return server.getPrimaryService("19b10000-e8f2-537e-4f6c-d104768a1214"); // funktioniert 29-11
           // return server.getPrimaryService("00001101-0000-1000-8000-00805f9b34fb"); // funktioniert 22-12
-          return serverSaved.getPrimaryService(primaryService1);
+          return server.getPrimaryService(primaryService1);
         }).
         then((x) => {
           this._log('Service found', 'Getting characteristic...');
 
-          return serverSaved.getCharacteristic(primaryCharacteristic1);
+          return server.getCharacteristic(primaryCharacteristic1);
         }).
-        then((characteristic1) => {
+        then((characteristic) => {
           this._log('Characteristic found');
           console.log('Charactersitic: ')
           console.log(characteristic)
 
-          this._characteristic = characteristic1; // Remember characteristic.
+          this._characteristic = characteristic; // Remember characteristic.
 
-          return serverSaved.getPrimaryService(primaryService2);
-        }).
-        then((y) => {
-          this._log('Service found', 'Getting characteristic...');
-
-          return serverSaved.getCharacteristic(primaryCharacteristic2);
-        }).
-        then((characteristic2) => {
-          this._log('Characteristic found');
-          console.log('Charactersitic: ')
-          console.log(characteristic)
-
-          this._characteristic = characteristic2; // Remember characteristic.
-
-          return this._characteristic;
-        })/*.
-        catch((error) => {
-          console.log("Error inside connectDeviceAndCacheCharacteristic");
-          console.log(error);
-        })*/;
+        });
   }
 
   /**
