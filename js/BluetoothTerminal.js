@@ -343,7 +343,11 @@
         then((server) => {
           this._log('GATT server connected', 'Getting service...');
           console.log(server);
+          console.log(typeof server);
           serverSaved = structuredClone(server);
+          console.log("serverSaved");
+          console.log(serverSaved);
+          console.log(typeof serverSaved);
 
           // return server.getPrimaryService("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82"); // noch keine Funktion hinterlegt im Arduino Code
           // return server.getPrimaryService("19b10000-e8f2-537e-4f6c-d104768a1214");  // funktioniert 29-11
