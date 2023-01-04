@@ -104,7 +104,7 @@
    *                   be started or rejected if something went wrong
    */
   connect() {
-    return this._connectToDevice(this._device, this._chooseCharacteristic);
+    return this._connectToDevice(this._device, 1); // TODO: Change static value to frontend depending variable => this._chooseCharacteristic
   }
 
   /**
@@ -341,8 +341,6 @@
       selectedPrimaryCharacteristic = primaryCharacteristic2;
 
     }
-
-    let serverSaved = undefined;
 
     // Check remembered characteristic.
     if (device.gatt.connected && this._characteristic) {
