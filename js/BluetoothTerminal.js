@@ -334,13 +334,17 @@
     let selectedPrimaryCharacteristic = "";
 
     if (chooseService == 1) {
+      console.log('if');
       selectedPrimaryService = primaryService1;
       selectedPrimaryCharacteristic = primaryCharacteristic1;
     } else if (chooseService == 2) {
+      console.log('else if');
       selectedPrimaryService = primaryService2;
       selectedPrimaryCharacteristic = primaryCharacteristic2;
-
+    } else {
+      console.error("Error inside connectDeviceAndCacheCharacteristic: chooseService var caused problem");
     }
+    console.log('Selected: ' + selectedPrimaryService + ", " + selectedPrimaryCharacteristic);
 
     // Check remembered characteristic.
     if (device.gatt.connected && this._characteristic) {
