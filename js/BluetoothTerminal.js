@@ -30,6 +30,13 @@
     this.setSendSeparator(sendSeparator);
   }
 
+  checkbox(value) {
+    console.log('Entered function checkbox');
+    this._selectedService = value;
+    console.log(this._selectedService);
+    this.connect();
+  }
+
   /**
    * Set number or string representing service UUID used.
    * @param {!(number|string)} uuid - Service UUID

@@ -12,7 +12,12 @@ checkbox.addEventListener('click', () => {
   console.log('horray!');
   if (document.getElementById('test').checked) {
   	console.log('checked');
-   }
+    terminal.checkbox(2);
+  } else {
+  	console.log('unchecked');
+    terminal.checkbox(1);
+  }
+  
 });
 
 // Helpers.
