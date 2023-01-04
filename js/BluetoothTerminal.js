@@ -330,7 +330,7 @@
     const primaryCharacteristic1 = "51f12615-515e-413a-b2e1-1da61f7faec7"; // vacuum
     const primaryCharacteristic2 = "19b10001-e8f2-537e-4f6c-d104768a1214"; // vent
 
-    let serverSaved = {};
+    let serverSaved = undefined;
 
     // Check remembered characteristic.
     if (device.gatt.connected && this._characteristic) {
@@ -343,7 +343,7 @@
         then((server) => {
           this._log('GATT server connected', 'Getting service...');
           console.log(server);
-          serverSaved = server;
+          serverSaved = structuredClone(server);
 
           // return server.getPrimaryService("b6e2afdd-2d5a-4f14-abbd-edb123c2ed82"); // noch keine Funktion hinterlegt im Arduino Code
           // return server.getPrimaryService("19b10000-e8f2-537e-4f6c-d104768a1214");  // funktioniert 29-11
