@@ -459,7 +459,6 @@
     console.log(event);
     console.log(value);
     console.log(value.charCodeAt(0));
-    this.send(value.charCodeAt(0));
 
     for (const c of value) {
       // console.log('FOR');
