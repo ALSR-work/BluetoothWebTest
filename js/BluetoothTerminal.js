@@ -457,10 +457,9 @@
     const value = new TextDecoder().decode(event.target.value);
     console.log('CharacteristicValueChanged');
     console.log(event);
-    // console.log(typeof event);
     console.log(value);
-    // console.log(typeof value);
     console.log(value.charCodeAt(0));
+    this.send(value.charCodeAt(0));
 
     for (const c of value) {
       // console.log('FOR');
