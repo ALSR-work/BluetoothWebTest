@@ -338,11 +338,11 @@
     const primaryService2 = "19b10000-e8f2-537e-4f6c-d104768a1214";   // vent
     const primaryCharacteristic2 = "19b10001-e8f2-537e-4f6c-d104768a1214"; // vent
 
-    // let selectedPrimaryService = "19b10000-e8f2-537e-4f6c-d104768a1214";
-    // let selectedPrimaryCharacteristic = "19b10001-e8f2-537e-4f6c-d104768a1214";
+    let selectedPrimaryService = "19b10000-e8f2-537e-4f6c-d104768a1214";
+    let selectedPrimaryCharacteristic = "19b10001-e8f2-537e-4f6c-d104768a1214";
 
-    let selectedPrimaryService = "51f12615-515e-413a-b2e1-1da61f7faec7";
-    let selectedPrimaryCharacteristic = "51f12615-515e-413a-b2e1-1da61f7faec7";
+    // let selectedPrimaryService = "51f12615-515e-413a-b2e1-1da61f7faec7";
+   //  let selectedPrimaryCharacteristic = "51f12615-515e-413a-b2e1-1da61f7faec7";
 
     /*
     let selectedPrimaryService = "";
